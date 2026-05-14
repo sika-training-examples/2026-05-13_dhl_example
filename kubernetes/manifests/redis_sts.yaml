@@ -3,6 +3,15 @@ kind: StatefulSet
 metadata:
   name: redis
 spec:
+  volumeClaimTemplates:
+    - metadata:
+        name: redis
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
   selector:
     matchLabels:
       app: redis
@@ -11,11 +20,20 @@ spec:
       labels:
         app: redis
     spec:
+      securityContext:
+        fsGroup: 999
+      volumes:
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
       containers:
         - name: main
           image: redis:8
           ports:
             - containerPort: 6379
+          volumeMounts:
+            - name: redis
+              mountPath: /data
           resources:
             requests:
               cpu: 20m
