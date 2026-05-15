@@ -27,7 +27,7 @@ spec:
             - name: REDIS
               value: redis
             - name: EXTRA_TEXT_SUFFIX
-              value: v8
+              value: v9
           envFrom:
             - configMapRef:
                 name: backend
