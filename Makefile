@@ -17,7 +17,7 @@ push:
 	docker compose push
 
 helm-install:
-	helm upgrade --install dhl-example ./kubernetes/chart -f ./kubernetes/values/local.values.yaml
+	helm upgrade --install dhl-example ./kubernetes/chart --wait -f ./kubernetes/values/local.values.yaml
 
 helm-template:
 	helm template dhl-example ./kubernetes/chart -f ./kubernetes/values/local.values.yaml

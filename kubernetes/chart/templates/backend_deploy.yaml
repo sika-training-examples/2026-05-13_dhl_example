@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: backend
+      annotations:
+        checksum/backend-cm: {{ include (print $.Template.BasePath "/backend_cm.yaml") . | sha256sum }}
     spec:
       serviceAccountName: migrations-job-read
       initContainers:
