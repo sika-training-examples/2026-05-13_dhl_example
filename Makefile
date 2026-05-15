@@ -15,3 +15,7 @@ build:
 
 push:
 	docker compose push
+
+helm-package-and-push:
+	helm package kubernetes/chart
+	helm push dhl-example-0.0.0.tgz oci://ttl.sh/helm
