@@ -34,3 +34,7 @@ spec:
               port: 8000
             periodSeconds: 1
             failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000
