@@ -1,0 +1,7 @@
+# Required
+host:
+
+# Optional
+backupServerHost:
+
+ingressClassName: haproxy

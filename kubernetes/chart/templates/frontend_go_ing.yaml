@@ -5,13 +5,13 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  ingressClassName: haproxy
+  ingressClassName: {{ .Values.ingressClassName }}
   tls:
     - hosts:
-        - ondrej.aks.sikademo.com
-      secretName: ondrej.aks.sikademo.com-tls
+        - {{ .Values.host }}
+      secretName: {{ .Values.host }}-tls
   rules:
-    - host: ondrej.aks.sikademo.com
+    - host: {{ required ".Values.host is required" .Values.host }}
       http:
         paths:
           - path: /
