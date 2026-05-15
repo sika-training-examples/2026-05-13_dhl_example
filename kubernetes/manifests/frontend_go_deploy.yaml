@@ -34,3 +34,7 @@ spec:
               port: 3000
             periodSeconds: 1
             failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /api/livez
+              port: 3000
