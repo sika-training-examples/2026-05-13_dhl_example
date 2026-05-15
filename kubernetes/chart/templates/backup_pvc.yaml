@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: backup
 spec:
-  storageClassName: azurefile-csi
+  storageClassName: {{.Values.backupStorageClassName}}
   accessModes:
     - ReadWriteMany
   resources:

@@ -4,7 +4,7 @@ metadata:
   name: frontend-go
 spec:
   revisionHistoryLimit: 0
-  replicas: 4
+  replicas: {{ .Values.frontendGoReplicas }}
   selector:
     matchLabels:
       app: frontend-go
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: main
-          image: ttl.sh/dhl/frontend
+          image: {{ .Values.frontendGoImage }}
           ports:
             - containerPort: 3000
           env:

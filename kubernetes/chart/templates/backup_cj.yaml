@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: backup
 spec:
-  schedule: "* * * * *"
+  schedule: {{ .Values.backupSchedule | quote }}
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
   jobTemplate:
@@ -27,6 +27,7 @@ spec:
                 - -c
                 - /tergum.yaml
                 - --expand-env
+              {{ if .Values.backupAzureStorageAccountSecretName }}
               env:
                 - name: ACCOUNT_NAME
                   valueFrom:
@@ -38,6 +39,7 @@ spec:
                     secretKeyRef:
                       name: azure-storage-account-f384c85f6f32e4981982b51-secret
                       key: azurestorageaccountkey
+              {{ end }}
               volumeMounts:
                 - name: backup
                   mountPath: /backup

@@ -4,7 +4,7 @@ metadata:
   name: backend
 spec:
   revisionHistoryLimit: 0
-  replicas: 4
+  replicas: {{ .Values.backendReplicas }}
   selector:
     matchLabels:
       app: backend
@@ -20,14 +20,12 @@ spec:
           command: [ kubectl, wait, --for=condition=complete, --timeout=600s, job/migrations ]
       containers:
         - name: main
-          image: ttl.sh/dhl/backend
+          image: {{ .Values.backendImage }}
           ports:
             - containerPort: 8000
           env:
             - name: REDIS
               value: redis
-            - name: EXTRA_TEXT_SUFFIX
-              value: v7
           envFrom:
             - configMapRef:
                 name: backend

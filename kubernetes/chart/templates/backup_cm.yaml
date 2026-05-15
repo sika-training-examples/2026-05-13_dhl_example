@@ -21,6 +21,7 @@ data:
               Dir: /backup/counter
               Prefix: counter-redis
               Suffix: dump
+          {{ if .Values.backupAzureStorageAccountSecretName }}
           - ID: AzureBlob
             AzureBlob:
               AccountName: $ACCOUNT_NAME
@@ -28,3 +29,4 @@ data:
               ContainerName: backup
               Prefix: counter-redis
               Suffix: dump
+          {{ end }}
